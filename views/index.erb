@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Code+Pro">
+  <title>Hostname</title>
+<style>
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Source Code Pro', monospace;
+  background:#474747;
+  color:#fff;
+}
+
+#center {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.reduce_width {
+  width: 400px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+a {
+  color:#fff;
+}
+
+a:hover {
+  text-decoration:none;
+}
+</style>
+</head>
+<body>
+<div id="center">
+<h1>IP and Hostname Tool</h1>
+<h2>Hostname</h2>
+<%= @hostname %>
+<span id="ipv4_hostname"></span>
+<h2>IP Address</h2>
+<%= request.ip %>
+<span id="ipv4_ip"></span>
+<h2>User Agent</h2>
+<div class="reduce_width"><%= request.user_agent %></div>
+<br />
+<p><a href="/hostname">Hostname</a> and <a href="/ip">IP</a>  for scripts</p>
+<p>&copy; 2016 <a href="http://matthewburket.com" target="_blank">Matthew Burket</a></p>
+</div>
+<% if request.ip.include?(':') %>
+  <script src="https://ipv4_hostname.assignitapp.com/ipv4.js">
+<% end %>
+</script>
+</body>
+</html>
