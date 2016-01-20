@@ -41,6 +41,8 @@ a:hover {
 <h2>IP Address</h2>
 <%= request.ip %>
 <span id="ipv4_ip"></span>
+<h2>GeoIP Location</h2>
+<span id="geoip"></span>
 <h2>User Agent</h2>
 <div class="reduce_width"><%= request.user_agent %></div>
 <br />
@@ -50,6 +52,22 @@ a:hover {
 <% if request.ip.include?(':') %>
   <script src="https://ipv4_hostname.assignitapp.com/ipv4.js">
 <% end %>
+</script>
+<script>
+  var xmlhttp = new XMLHttpRequest();
+  var url = '<%= "http://freegeoip.net/json/" %>';
+  xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var geoIP = JSON.parse(xmlhttp.responseText);
+        var geoIPString = geoIP["city"] + ", " + geoIP["region_name"] + ", "
+        + geoIP["country_name"];
+        document.getElementById("geoip").innerHTML = geoIPString;
+
+    }
+  };
+  xmlhttp.open("GET", url, false);
+  xmlhttp.send();
+  xmlhttp.close();
 </script>
 </body>
 </html>

@@ -1,7 +1,10 @@
 require 'sinatra'
 require 'resolv'
+require 'tilt/erubis'
 
 get '/' do
+  headers \
+   "Access-Control-Allow-Origin" => "*"
   @hostname = get_hostname
   erb :index
 end
@@ -14,9 +17,10 @@ get '/hostname' do
   get_hostname
 end
 
-get '/ipv4' do
-  'document.getElementById("ipv4_ip").innerHTML = "<br /> IPv4: <%= request.remote_ip %>"'
-  'document.getElementById("ipv4_hostname").innerHTML = "<br /> IPv4: <%= @hostname %>"'
+get '/ipv4.js' do
+  content_type 'text/javascript'
+  "document.getElementById(\"ipv4_ip\").innerHTML = \"<br /> IPv4:  #{request.ip}\"" + "\n" +
+  "document.getElementById(\"ipv4_hostname\").innerHTML = \"<br /> IPv4:' + #{get_hostname}\""
 end
 
 private
