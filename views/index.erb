@@ -61,6 +61,9 @@ a:hover {
         var geoIP = JSON.parse(xmlhttp.responseText);
         var geoIPString = geoIP["city"] + ", " + geoIP["region_name"] + ", "
         + geoIP["country_name"];
+        if (geoIPString.length <= 0) {
+            geoIPString = "N/A"
+        }
         document.getElementById("geoip").innerHTML = geoIPString;
 
     }
