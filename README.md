@@ -2,10 +2,11 @@
 
 ## How to run
 
-  $ gem install sinatra
-  $ ruby hostname.rb
+`$ gem install sinatra`
 
-Will star the site on localhost:4567
+`$ ruby hostname.rb`
+
+Will star the site on `http://localhost:4567`
 
 ## Credit
 This was inspired by [Joel May's](http://jmay.us)
